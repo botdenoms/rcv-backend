@@ -8,24 +8,34 @@ import org.springframework.stereotype.Service;
 import devs.denoms.rcv.model.Election;
 import devs.denoms.rcv.model.FeedBack;
 import devs.denoms.rcv.model.Vote;
+import devs.denoms.rcv.repos.ElectionsRepo;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @Service
 public class Services {
+    private final ElectionsRepo repo;
     
-    public static List<Election>  getElections(){
-        List<Election> db = new ArrayList<Election>();
-        db.add(new Election("test 1", "2024-15-09", "test description"));
-        db.add(new Election("test 2", "2026-15-09", "test description"));
-        db.add(new Election("test 3", "2027-15-09", "test description"));
-        return db;
+    @Autowired
+    public Services(@Qualifier("Fake") ElectionsRepo repo){
+        this.repo = repo;
     }
 
-    public static Election getElection(String id){
-        return new Election("test 1", "2024-15-09", "test description");
+    public Election createElection(Election election){
+        return repo.addElection(election);
+    }
+    
+    public List<Election>  getElections(){
+        return repo.getElections();
+    }
+
+    public Optional<Election> getElection(String id){
+        return repo.getElection(id);
     }
 
     public static Vote vote(String id){
-        return new Vote("test vote", 2);
+        return new Vote("", 0);
     }
 
     public static FeedBack voteOnElection(String id){
@@ -33,10 +43,10 @@ public class Services {
     }
 
     public static List<Vote> getVotesOfElection(String id){
-        List<Vote> db = new ArrayList<Vote>();
-        db.add(new Vote("test 1", 1));
-        db.add(new Vote("test 2", 2));
-        db.add(new Vote("test 3", 5));
+         List<Vote> db = new ArrayList<>();
+         db.add(new Vote("test 1", 1));
+         db.add(new Vote("test 2", 2));
+         db.add(new Vote("test 3", 5));
         return db;
     }
 
