@@ -34,20 +34,16 @@ public class Services {
         return repo.getElection(id);
     }
 
-    public static Vote vote(String id){
-        return new Vote("", 0);
+    public Vote vote(Vote vote){
+        return repo.addVote(vote);
+    }
+    
+    public List<Vote> votes(){
+        return repo.getVotes();
     }
 
-    public static FeedBack voteOnElection(String id){
-        return new FeedBack(id);
-    }
-
-    public static List<Vote> getVotesOfElection(String id){
-         List<Vote> db = new ArrayList<>();
-         db.add(new Vote("test 1", 1));
-         db.add(new Vote("test 2", 2));
-         db.add(new Vote("test 3", 5));
-        return db;
+    public List<Vote> votesOfElection(String id){
+         return repo.getVotesOf(id);
     }
 
 }

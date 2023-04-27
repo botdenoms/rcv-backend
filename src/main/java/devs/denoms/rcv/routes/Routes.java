@@ -44,19 +44,19 @@ public class Routes {
         return new ResponseEntity<>(services.createElection(election), HttpStatus.OK);
     }
 
-//    @PostMapping("api/v1/elections/vote")
-//    public ResponseEntity<FeedBack> vote(@RequestBody String id){
-//        return new ResponseEntity<>(Services.voteOnElection(id), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/elections/vote/{id}")
-//    public ResponseEntity<Vote> electionVote(@PathVariable("id") String id){
-//        return new ResponseEntity<>(Services.vote(id), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/elections/votes/{id}")
-//    public ResponseEntity<List<Vote>> electionVotes(@PathVariable("id") String id){
-//        return new ResponseEntity<>(Services.getVotesOfElection(id), HttpStatus.OK);
-//    }
+    @PostMapping("api/v1/votes")
+    public ResponseEntity<Vote> vote(@RequestBody Vote vote){
+        return new ResponseEntity<>(services.vote(vote), HttpStatus.OK);
+    }
+
+    @GetMapping("api/v1/votes")
+    public ResponseEntity<List<Vote>> votes(){
+        return new ResponseEntity<>(services.votes(), HttpStatus.OK);
+    }
+    
+    @GetMapping("api/v1/votes/{id}")
+    public ResponseEntity<List<Vote>> electionVotes(@PathVariable("id") String id){
+        return new ResponseEntity<>(services.votesOfElection(id), HttpStatus.OK);
+    }
 
 }
