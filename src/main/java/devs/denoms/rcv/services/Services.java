@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import devs.denoms.rcv.model.Election;
-import devs.denoms.rcv.model.FeedBack;
 import devs.denoms.rcv.model.Vote;
 import devs.denoms.rcv.repos.ElectionsRepo;
 import java.util.Optional;
@@ -22,7 +21,7 @@ public class Services {
         this.repo = repo;
     }
 
-    public Election createElection(Election election){
+    public String createElection(Election election){
         return repo.addElection(election);
     }
     
@@ -34,7 +33,7 @@ public class Services {
         return repo.getElection(id);
     }
 
-    public Vote vote(Vote vote){
+    public Boolean vote(Vote vote){
         return repo.addVote(vote);
     }
     

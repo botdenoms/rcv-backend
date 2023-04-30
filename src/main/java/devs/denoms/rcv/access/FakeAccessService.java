@@ -29,15 +29,15 @@ public class FakeAccessService implements ElectionsRepo{
     }
 
     @Override
-    public Election addElection(Election election) {
+    public String addElection(Election election) {
         DB.add(election);
-        return election;
+        return election.electionId();
     }
 
     @Override
-    public Vote addVote(Vote vote) {
+    public Boolean addVote(Vote vote) {
         VTS.add(vote);
-        return vote;
+        return true;
     }
 
     @Override

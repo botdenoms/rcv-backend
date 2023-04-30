@@ -10,9 +10,9 @@ public interface ElectionsRepo {
     
     Optional<Election> getElection(String id);
     
-    Election addElection(Election election);
+    String addElection(Election election);
     
-    Vote addVote(Vote vote);
+    Boolean addVote(Vote vote);
     
     List<Vote> getVotes();
     

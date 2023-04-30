@@ -5,14 +5,16 @@ import java.util.UUID;
 
 public class Vote {
     public String election;
-    public int choice;
-    private Voter voter;
+    public int[] choices;
+    private final String voter;
     private final String id;
     
-    public Vote(@JsonProperty("election") String election, 
-            @JsonProperty("choice") int choice){
+    public Vote(@JsonProperty("election") String election,
+            @JsonProperty("voter") String voter,
+            @JsonProperty("choices") int[] choices){
         this.election = election;
-        this.choice = choice;
+        this.choices = choices;
+        this.voter = voter;
         this.id = UUID.randomUUID().toString();
     }
 
@@ -24,7 +26,7 @@ public class Vote {
         return id;
     }
     
-    public Voter getCaster(){
+    public String voterId(){
         return voter;
     }
 }
