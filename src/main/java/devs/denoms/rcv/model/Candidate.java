@@ -1,16 +1,21 @@
 package devs.denoms.rcv.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class Candidate {
-    public String election;
+    private final String election;
     public String name;
     public String party;
     public String profile;
     public String logo;
     private final String id;
 
-    public Candidate(String election, String name, String party, String profile, String logo) {
+    public Candidate(@JsonProperty("election") String election, 
+            @JsonProperty("name") String name, 
+            @JsonProperty("party") String party, 
+            @JsonProperty("profile") String profile, 
+            @JsonProperty("logo") String logo) {
         this.election = election;
         this.name = name;
         this.party = party;
@@ -21,5 +26,9 @@ public class Candidate {
     
     public String getId(){
         return id;
+    }
+    
+    public String getElection(){
+        return election;
     }
 }

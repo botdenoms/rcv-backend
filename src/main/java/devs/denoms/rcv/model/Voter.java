@@ -1,5 +1,6 @@
 package devs.denoms.rcv.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class Voter {
@@ -13,7 +14,8 @@ public class Voter {
         this.id = UUID.randomUUID().toString();
     }
     
-    public Voter(String name, String location) {
+    public Voter( @JsonProperty("name") String name, 
+            @JsonProperty("location") String location) {
         this.name = name;
         this.location = location;
         this.id = UUID.randomUUID().toString();

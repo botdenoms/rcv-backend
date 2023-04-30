@@ -1,7 +1,9 @@
 package devs.denoms.rcv.access;
 
+import devs.denoms.rcv.model.Candidate;
 import devs.denoms.rcv.model.Election;
 import devs.denoms.rcv.model.Vote;
+import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.repos.ElectionsRepo;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Repository;
 public class FakeAccessService implements ElectionsRepo{
     private static final List<Election> DB = new ArrayList<>();
     private static final List<Vote> VTS = new ArrayList<>();
+    private static final List<Voter> VTRS = new ArrayList<>();
+    private static final List<Candidate> CDS = new ArrayList<>();
 
     @Override
     public List<Election> getElections() {
@@ -51,6 +55,53 @@ public class FakeAccessService implements ElectionsRepo{
         for (Vote vote : VTS) {
             if (vote.voteOf().equals(electionId)) {
                 tmp.add(vote);
+            }
+        }
+        return tmp;
+    }
+
+    @Override
+    public Boolean addCandidate(Candidate candidate) {
+        CDS.add(candidate);
+        return true;
+    }
+
+    @Override
+    public List<Candidate> getCandidates() { 
+        return CDS;
+    }
+
+    @Override
+    public List<Candidate> getCandidatesOf(String electionId) {
+        List<Candidate> tmp = new ArrayList<>();
+        for (Candidate cd : CDS) {
+            if (cd.getElection().equals(electionId)) {
+                tmp.add(cd);
+            }
+        }
+        return tmp;
+    }
+
+    @Override
+    public Boolean addVoter(Voter voter) {
+        VTRS.add(voter);
+        return true;
+    }
+
+    @Override
+    public List<Voter> getVoters() {
+        return VTRS;
+    }
+
+    @Override
+    public List<Voter> getVotersOf(String electionId) {
+        List<Voter> tmp = new ArrayList<>();
+        List<Vote> votesOf = getVotesOf(electionId);
+        for(Voter vtr: VTRS){
+            for (Vote vt : votesOf){
+                if(vtr.getId().equals(vt.voterId())){
+                    tmp.add(vtr);
+                }
             }
         }
         return tmp;

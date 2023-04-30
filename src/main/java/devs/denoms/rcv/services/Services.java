@@ -1,5 +1,6 @@
 package devs.denoms.rcv.services;
 
+import devs.denoms.rcv.model.Candidate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import devs.denoms.rcv.model.Election;
 import devs.denoms.rcv.model.Vote;
+import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.repos.ElectionsRepo;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,30 @@ public class Services {
 
     public List<Vote> votesOfElection(String id){
          return repo.getVotesOf(id);
+    }
+    
+    public Boolean candidate(Candidate candidate){
+        return repo.addCandidate(candidate);
+    }
+    
+    public List<Candidate> candidates(){
+        return repo.getCandidates();
+    }
+    
+    public List<Candidate> candidatesOfElection(String id){
+         return repo.getCandidatesOf(id);
+    }
+    
+    public Boolean voter(Voter voter){
+        return repo.addVoter(voter);
+    }
+    
+    public List<Voter> voters(){
+        return repo.getVoters();
+    }
+    
+    public List<Voter> votersOfElection(String id){
+         return repo.getVotersOf(id);
     }
 
 }

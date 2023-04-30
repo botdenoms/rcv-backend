@@ -1,5 +1,6 @@
 package devs.denoms.rcv.routes;
 
+import devs.denoms.rcv.model.Candidate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import devs.denoms.rcv.model.Election;
 import devs.denoms.rcv.model.Vote;
+import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.services.Services;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,29 +35,58 @@ public class Routes {
         return new ResponseEntity<>(services.getElections(), HttpStatus.OK);
     }
 
-    @GetMapping("elections/{id}")
+    @GetMapping("/elections/{id}")
     public ResponseEntity<Optional<Election>> election(@PathVariable("id") String id){
         return new ResponseEntity<>(services.getElection(id), HttpStatus.OK);
     }
 
-    @PostMapping("elections")
+    @PostMapping("/elections")
     public ResponseEntity<String> create(@RequestBody Election election){
         return new ResponseEntity<>(services.createElection(election), HttpStatus.OK);
     }
 
-    @PostMapping("votes")
+    @PostMapping("/votes")
     public ResponseEntity<Boolean> vote(@RequestBody Vote vote){
         return new ResponseEntity<>(services.vote(vote), HttpStatus.OK);
     }
 
-    @GetMapping("votes")
+    @GetMapping("/votes")
     public ResponseEntity<List<Vote>> votes(){
         return new ResponseEntity<>(services.votes(), HttpStatus.OK);
     }
     
-    @GetMapping("votes/{id}")
-    public ResponseEntity<List<Vote>> electionVotes(@PathVariable("id") String id){
+    @GetMapping("/votes/{id}")
+    public ResponseEntity<List<Vote>> votesOfElection(@PathVariable("id") String id){
         return new ResponseEntity<>(services.votesOfElection(id), HttpStatus.OK);
     }
-
+    
+    @PostMapping("/candidates")
+    public ResponseEntity<Boolean> candidate(@RequestBody Candidate candidate){
+        return new ResponseEntity<>(services.candidate(candidate), HttpStatus.OK);
+    }
+    
+    @GetMapping("/candidates")
+    public ResponseEntity<List<Candidate>> candidates(){
+        return new ResponseEntity<>(services.candidates(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/candidates/{id}")
+    public ResponseEntity<List<Candidate>> candidatesOfElection(@PathVariable("id") String id){
+        return new ResponseEntity<>(services.candidatesOfElection(id), HttpStatus.OK);
+    }
+    
+    @PostMapping("/voters")
+    public ResponseEntity<Boolean> voter(@RequestBody Voter voter){
+       return new ResponseEntity<>(services.voter(voter), HttpStatus.OK);
+    }
+    
+    @GetMapping("/voters")
+    public ResponseEntity<List<Voter>> voters(){
+       return new ResponseEntity<>(services.voters(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/voters/{id}")
+    public ResponseEntity<List<Voter>> votersOfElection(@PathVariable("id") String id){
+       return new ResponseEntity<>(services.votersOfElection(id), HttpStatus.OK);
+    }
 }
