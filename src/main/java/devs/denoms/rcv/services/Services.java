@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import devs.denoms.rcv.model.Election;
+import devs.denoms.rcv.model.Result;
 import devs.denoms.rcv.model.Vote;
 import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.repos.ElectionsRepo;
@@ -70,5 +71,16 @@ public class Services {
     public List<Voter> votersOfElection(String id){
          return repo.getVotersOf(id);
     }
-
+    
+    public Boolean result(Result result){
+        return repo.addResult(result);
+    }
+    
+    public List<Result> results(){
+        return repo.getResults();
+    }
+    
+    public Optional<Result> resultsOfElection(String id){
+         return repo.getResult(id);
+    }
 }

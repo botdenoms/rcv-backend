@@ -2,6 +2,7 @@ package devs.denoms.rcv.repos;
 
 import devs.denoms.rcv.model.Candidate;
 import devs.denoms.rcv.model.Election;
+import devs.denoms.rcv.model.Result;
 import devs.denoms.rcv.model.Vote;
 import devs.denoms.rcv.model.Voter;
 import java.util.List;
@@ -31,4 +32,10 @@ public interface ElectionsRepo {
     List<Voter> getVoters();
     
     List<Voter> getVotersOf(String electionId);
+    
+    Boolean addResult(Result result);
+    
+    List<Result> getResults();
+    
+    Optional<Result> getResult(String id);
 }

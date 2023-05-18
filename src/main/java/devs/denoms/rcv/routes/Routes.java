@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import devs.denoms.rcv.model.Election;
+import devs.denoms.rcv.model.Result;
 import devs.denoms.rcv.model.Vote;
 import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.services.Services;
@@ -88,5 +89,20 @@ public class Routes {
     @GetMapping("/voters/{id}")
     public ResponseEntity<List<Voter>> votersOfElection(@PathVariable("id") String id){
        return new ResponseEntity<>(services.votersOfElection(id), HttpStatus.OK);
+    }
+    
+    @GetMapping("/results")
+    public ResponseEntity<List<Result>> results(){
+       return new ResponseEntity<>(services.results(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/results/{id}")
+    public ResponseEntity<Optional<Result>> resultsOfElection(@PathVariable("id") String id){
+       return new ResponseEntity<>(services.resultsOfElection(id), HttpStatus.OK);
+    }
+    
+    @PostMapping("/results")
+    public ResponseEntity<Boolean> result(@RequestBody Result result){
+       return new ResponseEntity<>(services.result(result), HttpStatus.OK);
     }
 }

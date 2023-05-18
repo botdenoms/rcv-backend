@@ -2,6 +2,7 @@ package devs.denoms.rcv.access;
 
 import devs.denoms.rcv.model.Candidate;
 import devs.denoms.rcv.model.Election;
+import devs.denoms.rcv.model.Result;
 import devs.denoms.rcv.model.Vote;
 import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.repos.ElectionsRepo;
@@ -16,6 +17,7 @@ public class FakeAccessService implements ElectionsRepo{
     private static final List<Vote> VTS = new ArrayList<>();
     private static final List<Voter> VTRS = new ArrayList<>();
     private static final List<Candidate> CDS = new ArrayList<>();
+    private static final List<Result> RTS = new ArrayList<>();
 
     @Override
     public List<Election> getElections() {
@@ -105,6 +107,27 @@ public class FakeAccessService implements ElectionsRepo{
             }
         }
         return tmp;
+    }
+
+    @Override
+    public Boolean addResult(Result result) {
+        RTS.add(result);
+        return true;
+    }
+
+    @Override
+    public List<Result> getResults() {
+        return RTS;
+    }
+
+    @Override
+    public Optional<Result> getResult(String id) {
+        for (Result res : RTS) {
+            if (res.getElection().equals(id)) {
+                return Optional.of(res);
+            }
+        }
+        return Optional.empty();
     }
     
 }
