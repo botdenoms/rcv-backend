@@ -19,9 +19,11 @@ import devs.denoms.rcv.model.Voter;
 import devs.denoms.rcv.services.Services;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("api/v1")
+@CrossOrigin()
 public class Routes {
     
     private final Services services; 
